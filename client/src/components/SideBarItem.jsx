@@ -1,18 +1,19 @@
-import React from 'react';
-import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import React from "react";
 
-export const SidebarItem = () => {
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 
-    return (
-        <ListItem disablePadding>
-            <ListItemButton>
-                <ListItemIcon>
-                </ListItemIcon>
-                <Grid container direction='column'>
-                    <ListItemText primary="A" />
-                    <ListItemText secondary="b" />
-                </Grid>
-            </ListItemButton>
-        </ListItem>
-    );
+export const SidebarItem = ({ text, icon }) => {
+  return (
+    <ListItem>
+      <ListItemButton>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText>{text}</ListItemText>
+      </ListItemButton>
+    </ListItem>
+  );
 };

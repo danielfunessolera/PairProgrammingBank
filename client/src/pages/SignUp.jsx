@@ -3,25 +3,28 @@ import Input from "../components/Input";
 import { RegisterForm } from "../components/RegisterForm";
 import { FormButton } from "../components/FormButton";
 import { Container } from "@mui/material";
+import postUser from "../services/registerUser";
 
 const SignUp = () => {
   const [formState, setFormState] = useState({});
 
-  const onSubmit = () => {
-    console.log({ onSubmit: formState });
-
-	// Llamar al useFetch();
+  const handleSubmit = () => {
+    const { firstName, lastName, userName, password } = formState;
+    if (formState.passwordConfirm === formState.password) {
+      postUser(firstName, lastName, userName, password);
+    } else {
+      console.log("Las contraseñas no coinciden");
+    }
+    console.log(formState);
   };
 
-  const onInputChange = ({ target }) => {
+  const handleInputChange = ({ target }) => {
     const { name, value } = target;
 
     setFormState({
       ...formState,
       [name]: value,
     });
-
-    console.log(formState);
   };
 
   return (
@@ -33,36 +36,32 @@ const SignUp = () => {
         placeContent: "center",
       }}
     >
-      <img
-        className="logo-login"
-        src="../../public/assets/logo_login.jpg"
-        alt="bank app logo"
-      />
+      <img className="logo-login" src="/logo_login.jpg" alt="bank app logo" />
       <h2 className="form-title">Sign Up</h2>
       <RegisterForm>
         <Input
-          id="first-name"
+          id="firstName"
           label="First Name"
-          name="first-name"
+          name="firstName"
           minLength={1}
           maxLength={10}
-          onChange={onInputChange}
+          onChange={handleInputChange}
         />
         <Input
-          id="last-name"
+          id="lastName"
           label="Last Name"
-          name="last-name"
+          name="lastName"
           minLength={1}
           maxLength={10}
-          onChange={onInputChange}
+          onChange={handleInputChange}
         />
         <Input
           id="username"
-          label="Username"
-          name="username"
+          label="UserName"
+          name="userName"
           minLength={1}
           maxLength={10}
-          onChange={onInputChange}
+          onChange={handleInputChange}
         />
         <Input
           id="password"
@@ -70,22 +69,22 @@ const SignUp = () => {
           name="password"
           minLength={8}
           maxLength={20}
-          onChange={onInputChange}
-          type= "password"
+          onChange={handleInputChange}
+          type="password"
         />
         <Input
           id="password-confirm"
           label="Confirm Password"
-          name="password-confirm"
+          name="passwordConfirm"
           minLength={8}
           maxLength={20}
-          onChange={onInputChange}
-          type= "password"
+          onChange={handleInputChange}
+          type="password"
         />
         <FormButton
           text="Sign Up"
           type="submit"
-          onClick={onSubmit}
+          onClick={handleSubmit}
         ></FormButton>
       </RegisterForm>
     </Container>
