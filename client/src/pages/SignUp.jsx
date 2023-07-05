@@ -71,6 +71,7 @@ const SignUp = () => {
           minLength={8}
           maxLength={20}
           onChange={onInputChange}
+          type= "password"
         />
         <Input
           id="password-confirm"
@@ -79,6 +80,7 @@ const SignUp = () => {
           minLength={8}
           maxLength={20}
           onChange={onInputChange}
+          type= "password"
         />
         <FormButton
           text="Sign Up"

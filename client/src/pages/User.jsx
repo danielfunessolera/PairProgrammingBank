@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { AppLayout } from "../layout/AppLayout";
 
 const User = () => {
   return (
-    <div>User</div>
-  )
-}
+    <AppLayout>
+      <div>User</div>
+    </AppLayout>
+  );
+};
 
-export default User
+export default User;
