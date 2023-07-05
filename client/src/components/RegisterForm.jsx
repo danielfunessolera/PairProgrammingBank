@@ -1,15 +1,10 @@
-import React from 'react'
-import Form from '@mui/material/FormControl/'
+import React, { useState } from "react";
+import Form from "@mui/material/FormControl/";
 
-export const RegisterForm = ({children}) => {
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-    }
-    
+export const RegisterForm = ({ children }) => {
   return (
-    <Form onSubmit={onSubmit}>
-        {children}
+    <Form sx={{ margin: "0 auto", width: "100%" }} className="register-form">
+      {children}
     </Form>
-  )
-}
+  );
+};
