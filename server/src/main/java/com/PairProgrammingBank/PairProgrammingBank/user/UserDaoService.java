@@ -31,19 +31,11 @@ public class UserDaoService {
     }
 
     public void update(Integer id, User updatedUser) {
-        //Predicate<? super User> predicate = user -> user.getId().equals(id);
-        //User userToUpdate =  users.stream().filter(predicate).findFirst().orElse(null);
-        // userToUpdate.setEmail("@testemail");
-        //userToUpdate.setFirstName("cambio mi nombre");
-        //userToUpdate.setLastName("cambio mi apellido");
-        //userToUpdate.setPhone("cambio mi telefono");
-        //users.
-
         Predicate<? super User> predicate = user -> user.getId().equals(id);
         User existingUser = users.stream().filter(predicate).findFirst().orElse(null);
 
-
-        System.out.println(updatedUser.getUserName());
+        System.out.println("Existing user: " + existingUser.getFirstName());
+        // for(User usuario : users) { System.out.println(usuario.getFirstName() + " " + usuario.getPhone()); }
 
         // Actualizar solo los campos que se proporcionan en el objeto actualizado
         if (updatedUser.getFirstName() != null) {
@@ -59,8 +51,9 @@ public class UserDaoService {
             existingUser.setPhone(updatedUser.getPhone());
         }
 
-        System.out.println(updatedUser.getUserName());
-        System.out.println(updatedUser.getPhone());
+        System.out.println("Existing user: " + existingUser.getFirstName());
+        // for(User usuario : users) { System.out.println(usuario.getFirstName() + " " + usuario.getPhone()); }
+
     }
 
 }

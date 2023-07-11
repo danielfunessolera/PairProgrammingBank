@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import fetchUser from "../services/userFetch";
 import { FormButton } from "../components";
 import Form from "@mui/material/FormControl/";
+import updateUser from "../services/updateUser";
 
 const User = () => {
   const [user, setUser] = useState({
@@ -30,6 +31,11 @@ const User = () => {
     fetchData();
   }, []);
 
+  const handleSubmit = () => {
+    const { firstName, lastName, email, phone } = user;
+    updateUser(firstName, lastName, email, phone)
+  };
+
   return (
     <AppLayout>
       <Card sx={{ p: 2 }}>
@@ -40,7 +46,7 @@ const User = () => {
             alt="user settings illustration"
             width="30%"
           />
-          <Form sx={{ width: "60%" }}>
+          <Form sx={{ width: "60%" }} onSubmit={handleSubmit}>
             <Input
               id="first-name"
               label="First Name"
@@ -77,7 +83,7 @@ const User = () => {
               value={user.phone}
               onChange={handleInputChange}
             />
-            <FormButton type="submit" text={"Save"} />
+            <FormButton type="submit" text={"Save"} onClick={handleSubmit} />
           </Form>
         </Grid>
       </Card>
