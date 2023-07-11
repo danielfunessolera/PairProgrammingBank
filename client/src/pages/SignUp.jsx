@@ -9,7 +9,13 @@ const SignUp = () => {
   const [formState, setFormState] = useState({});
 
   const handleSubmit = () => {
-    const { firstName, lastName, userName, password } = formState;
+    const { 
+      firstName, 
+      lastName, 
+      userName, 
+      password 
+    } = formState;
+
     if (formState.passwordConfirm === formState.password) {
       postUser(firstName, lastName, userName, password);
     } else {
@@ -20,11 +26,14 @@ const SignUp = () => {
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
+    console.log({ name, value });
 
     setFormState({
       ...formState,
       [name]: value,
     });
+
+    console.log(formState);
   };
 
   return (
@@ -45,6 +54,7 @@ const SignUp = () => {
           name="firstName"
           minLength={1}
           maxLength={10}
+          value={formState.firstName}
           onChange={handleInputChange}
         />
         <Input
@@ -53,6 +63,7 @@ const SignUp = () => {
           name="lastName"
           minLength={1}
           maxLength={10}
+          value={formState.lastName}
           onChange={handleInputChange}
         />
         <Input
@@ -61,6 +72,7 @@ const SignUp = () => {
           name="userName"
           minLength={1}
           maxLength={10}
+          value={formState.userName}
           onChange={handleInputChange}
         />
         <Input
@@ -69,6 +81,7 @@ const SignUp = () => {
           name="password"
           minLength={8}
           maxLength={20}
+          value={formState.password}
           onChange={handleInputChange}
           type="password"
         />
@@ -78,6 +91,7 @@ const SignUp = () => {
           name="passwordConfirm"
           minLength={8}
           maxLength={20}
+          value={formState.passwordConfirm}
           onChange={handleInputChange}
           type="password"
         />

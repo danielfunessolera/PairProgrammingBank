@@ -2,6 +2,7 @@ import React from 'react'
 import {Routes, Route} from "react-router-dom";
 import User from '../pages/User';
 import SignUp from '../pages/SignUp';
+import BankAccount from '../pages/BankAccount';
 
 const Router = () => {
   return (
@@ -9,7 +10,7 @@ const Router = () => {
       <Route index path="/" element ={<User/>}/> 
       {/* <Route path="/transactions" element ={<Transactions/>}/>  */}
       <Route path="/signup" element ={<SignUp/>}/> 
-      {/* <Route path="/bankaccount" element ={<BankAccount/>}/>  */}
+      <Route path="/bankaccount" element ={<BankAccount/>}/> 
     </Routes>
   )
 }

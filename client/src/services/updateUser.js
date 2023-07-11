@@ -19,4 +19,4 @@ const updateUser = async ( firstName, lastName, email, phone) => {
     }
 }
 
-export default postUser;
+export default updateUser;
