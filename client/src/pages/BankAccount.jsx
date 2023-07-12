@@ -1,40 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { AppLayout } from "../layout/AppLayout";
 import { Card, Grid } from "@mui/material";
-import Input from "../components/Input";
-import fetchUser from "../services/userFetch";
-import Form from "@mui/material/FormControl/";
-import updateUser from "../services/updateUser";
-import { FormButton } from "../components";
+import Button from "@mui/material/Button";
+import fetchAccount from "../services/accountFetch";
 
 const BankAccount = () => {
   const [account, setAccount] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+    accountName: "",
+    bankName: "",
   });
 
-  //   const handleInputChange = ({ target }) => {
-  //     const { name, value } = target;
+    useEffect(() => {
+      const fetchData = async () => {
+        setAccount(await fetchAccount());
+      };
+      fetchData();
+    }, []);
 
-  //     setUser({
-  //       ...user,
-  //       [name]: value,
-  //     });
-  //   };
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       setUser(await fetchUser());
-  //     };
-  //     fetchData();
-  //   }, []);
-
-  //   const handleSubmit = () => {
-  //     const { firstName, lastName, email, phone } = user;
-  //     updateUser(firstName, lastName, email, phone)
-  //   };
 
   return (
     <AppLayout>
@@ -45,22 +27,30 @@ const BankAccount = () => {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <h2 style={{ fontSize: "20px", color: "#1976d2" }}>User Settings</h2>
-          <button
-            type="text"
-            style={{ padding: "10px 10px", backgroundColor: "blue" }}
-          >
-            CREATE
-          </button>
-          {/* <FormButton type="text" text={"CREATE"} style={{padding: "10px 10px"}}/> */}
+          <h2 style={{ fontSize: "20px", color: "#1976d2" }}>Bank Accounts</h2>
+          <Button variant="contained">CREATE</Button>
         </Grid>
 
-        <Grid container direcion="row" justifyContent={"space-between"}>
-          <img
-            src="/user_settings.png"
-            alt="user settings illustration"
-            width="30%"
-          />
+        <Grid
+          container
+          direcion="row"
+          justifyContent={"space-between"}
+          padding={1}
+          alignItems={"center"}
+        >
+          <p style={{ fontSize: "20px", color: "#1976d2" }}>{account.bankName + "-" + account.accountName}</p>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "white",
+              color: "black",
+              "&:hover": {
+                backgroundColor: "white",
+              },
+            }}
+          >
+            CREATE
+          </Button>
         </Grid>
       </Card>
     </AppLayout>

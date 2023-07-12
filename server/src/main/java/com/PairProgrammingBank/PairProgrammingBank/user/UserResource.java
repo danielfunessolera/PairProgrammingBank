@@ -1,6 +1,5 @@
 package com.PairProgrammingBank.PairProgrammingBank.user;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -17,12 +17,13 @@ public class User {
 
     private List<BankAccount> bankAccounts;
 
-    public User(Integer id, String firstName, String lastName, String userName, String password) {
+    public User(Integer id, String firstName, String lastName, String userName, String password, List<BankAccount> bankAccount) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.bankAccounts = bankAccount;
     }
 
     public Integer getId() {
