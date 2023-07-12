@@ -20,9 +20,16 @@ import {
   Notifications,
   Person,
 } from "@mui/icons-material";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 export const SideBar = ({ drawerWidth = 280 }) => {
-  const { userName, email, balance } = { userName: "pochico", email: "Oleole@ole.com", balance: "1,681.37" };
+  const { userName, email, balance } = {
+    userName: "pochico",
+    email: "Oleole@ole.com",
+    balance: "1,681.37",
+  };
+  const { updateUser } = useContext(AuthContext);
 
   const pages = [
     {
@@ -42,6 +49,11 @@ export const SideBar = ({ drawerWidth = 280 }) => {
       icon: <Notifications />,
     },
   ];
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    updateUser(null);
+  };
 
   return (
     <Box
@@ -71,9 +83,12 @@ export const SideBar = ({ drawerWidth = 280 }) => {
         </Toolbar>
 
         <List>
-        <ListItem>
+          <ListItem>
             <ListItemButton>
-              <ListItemText primary={`\$${balance}`} secondary="Account Balance"/>
+              <ListItemText
+                primary={`\$${balance}`}
+                secondary="Account Balance"
+              />
             </ListItemButton>
           </ListItem>
           <Grid container direction="column">
@@ -83,8 +98,10 @@ export const SideBar = ({ drawerWidth = 280 }) => {
           </Grid>
           <Container sx={{ mt: 2 }} />
           <ListItem>
-            <ListItemButton>
-              <ListItemIcon><Logout /></ListItemIcon>
+            <ListItemButton onClick={logout}>
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
               <ListItemText>Logout</ListItemText>
             </ListItemButton>
           </ListItem>

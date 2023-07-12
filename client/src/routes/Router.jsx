@@ -1,18 +1,29 @@
-import React from 'react'
-import {Routes, Route} from "react-router-dom";
-import User from '../pages/User';
-import SignUp from '../pages/SignUp';
-import BankAccount from '../pages/BankAccount';
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import User from "../pages/User";
+import SignUp from "../pages/SignUp";
+import BankAccount from "../pages/BankAccount";
+import { AuthContext } from "../context/AuthContext";
+import { AuthRoutes } from "./AuthRoutes";
+import { UserRoutes } from "./UserRoutes";
 
 const Router = () => {
-  return (
-    <Routes>
-      <Route index path="/" element ={<User/>}/> 
-      {/* <Route path="/transactions" element ={<Transactions/>}/>  */}
-      <Route path="/signup" element ={<SignUp/>}/> 
-      <Route path="/bankaccount" element ={<BankAccount/>}/> 
-    </Routes>
-  )
-}
+  const { user } = useContext(AuthContext);
 
-export default Router
+  return (
+    // TODO: enhance this code
+
+    <Routes>
+      
+	  {user !== null ? (
+        <Route path="/*" element={<UserRoutes />} />
+      ) : (
+        <Route path="/*" element={<AuthRoutes />} />
+      )}
+
+      <Route path="/*" element={<Navigate to="/signup" />} />
+    </Routes>
+  );
+};
+
+export default Router;
