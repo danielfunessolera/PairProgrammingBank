@@ -10,15 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PairProgrammingBankApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PairProgrammingBankApplication.class, args);
-		WebDriver gDriver = new ChromeDriver();
-		gDriver.get("http://www.google.com");
-
-		gDriver.findElement(By.id("W0wltc")).click();
-		WebElement element = gDriver.findElement(By.id("APjFqb"));
-		element.sendKeys("Población mundial 2023");
-		element.submit();
-	}
+	public static void main(String[] args) {SpringApplication.run(PairProgrammingBankApplication.class, args);		}
 
 }
