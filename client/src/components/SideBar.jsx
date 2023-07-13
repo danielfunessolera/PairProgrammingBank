@@ -15,27 +15,25 @@ import { Box } from "@mui/system";
 import { SidebarItem } from "./";
 import {
   AccountBalance,
-  Home,
   Logout,
-  Notifications,
   Person,
 } from "@mui/icons-material";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 export const SideBar = ({ drawerWidth = 280 }) => {
-  const { userName, email, balance } = {
-    userName: "pochico",
-    email: "Oleole@ole.com",
-    balance: "1,681.37",
-  };
+
+  const {firstName, lastName, userName} = useContext(AuthContext);
+  // const { userName, email, balance } = {
+  //   userName: "pochico",
+  //   email: "Oleole@ole.com",
+  //   balance: "1,681.37",
+  // };
+  const balance = "1,322.32";
+
   const { updateUser } = useContext(AuthContext);
 
   const pages = [
-    {
-      text: "Home",
-      icon: <Home />,
-    },
     {
       text: "My Account",
       icon: <Person />,
@@ -43,11 +41,7 @@ export const SideBar = ({ drawerWidth = 280 }) => {
     {
       text: "Bank Accounts",
       icon: <AccountBalance />,
-    },
-    {
-      text: "Notifications",
-      icon: <Notifications />,
-    },
+    }
   ];
 
   const logout = () => {
@@ -77,8 +71,8 @@ export const SideBar = ({ drawerWidth = 280 }) => {
             <Avatar></Avatar>
           </Container>
           <Grid container direction="column">
-            <Typography variant="h6">{userName}</Typography>
-            <Typography variant="p">{email}</Typography>
+            <Typography variant="h6">{firstName} {lastName}</Typography>
+            <Typography variant="p">{userName}</Typography>
           </Grid>
         </Toolbar>
 

@@ -19,8 +19,11 @@ export const AuthProvider = ({ children }) => {
   // Function to update the user and store it in localStorage
   const updateUser = (newUser) => {
     setUser(newUser);
+    const {username, lastname} = newUser;
     if (newUser !== null && newUser !== undefined) {
-      localStorage.setItem("user", newUser);
+      localStorage.setItem("username", username);
+      localStorage.setItem("lastname", lastname);
+      localStorage.setItem("username", username);
     }
   };
 

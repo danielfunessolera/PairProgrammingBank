@@ -23,9 +23,10 @@ public class BankAccountDaoService {
         return account;
     }
 
-    public void deleteById (Integer id) {
+    public List<BankAccount> deleteById (List<BankAccount> accounts, Integer id) {
         Predicate<? super BankAccount> predicate = account -> account.getId().equals(id);
         accounts.removeIf(predicate);
+        return accounts;
     }
 
 }
