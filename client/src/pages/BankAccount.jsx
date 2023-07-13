@@ -5,18 +5,36 @@ import Button from "@mui/material/Button";
 import fetchAccount from "../services/accountFetch";
 
 const BankAccount = () => {
-  const [account, setAccount] = useState({
+  const [account, setAccount] = useState([{
+    id: 0,
     accountName: "",
     bankName: "",
-  });
+    savings: 0
+  }]);
 
-    useEffect(() => {
-      const fetchData = async () => {
-        setAccount(await fetchAccount());
-      };
-      fetchData();
-    }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setAccount(await fetchAccount());
+  //     console.log({"antes del fetch": account})
+  //   };
+  //   fetchData();
+  //   console.log({"después del fetch" : account});
+  // }, []);
 
+  console.log(fetchAccount())
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setAccount(await fetchAccount());
+  //       console.log(account)
+  //     } catch (error) {
+  //       console.error("Error fetching account data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   return (
     <AppLayout>
@@ -31,27 +49,32 @@ const BankAccount = () => {
           <Button variant="contained">CREATE</Button>
         </Grid>
 
-        <Grid
-          container
-          direcion="row"
-          justifyContent={"space-between"}
-          padding={1}
-          alignItems={"center"}
-        >
-          <p style={{ fontSize: "20px", color: "#1976d2" }}>{account.bankName + "-" + account.accountName}</p>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "white",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "white",
-              },
-            }}
+        {account.map((acc, i) => {
+          <Grid
+            container
+            direcion="row"
+            justifyContent={"space-between"}
+            padding={1}
+            alignItems={"center"}
+            key={i}
           >
-            CREATE
-          </Button>
-        </Grid>
+            <p style={{ fontSize: "20px", color: "#1976d2" }}>
+              {acc.bankName + "-" + acc.accountName}
+            </p>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "white",
+                color: "black",
+                "&:hover": {
+                  backgroundColor: "white",
+                },
+              }}
+            >
+              DELETE
+            </Button>
+          </Grid>;
+        })}
       </Card>
     </AppLayout>
   );

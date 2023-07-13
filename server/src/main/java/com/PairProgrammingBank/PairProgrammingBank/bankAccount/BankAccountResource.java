@@ -21,8 +21,6 @@ public class BankAccountResource {
         List<BankAccount> Banks = userService.findOne(idUser).getBankAccounts();
         System.out.println(Banks);
         return Banks;
-
-
     }
 
 //    @CrossOrigin(origins = "http://localhost:5173/")

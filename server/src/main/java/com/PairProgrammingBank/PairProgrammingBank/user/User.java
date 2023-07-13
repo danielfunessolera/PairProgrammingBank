@@ -2,9 +2,13 @@ package com.PairProgrammingBank.PairProgrammingBank.user;
 
 import com.PairProgrammingBank.PairProgrammingBank.bankAccount.BankAccount;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    private static List<User> users = new ArrayList<>();
+    private static int userCount = 0;
 
     // Desde front
     private Integer id;
@@ -18,7 +22,7 @@ public class User {
     private List<BankAccount> bankAccounts;
 
     public User(Integer id, String firstName, String lastName, String userName, String password, List<BankAccount> bankAccount) {
-        this.id = id;
+        this.id = ++userCount;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
