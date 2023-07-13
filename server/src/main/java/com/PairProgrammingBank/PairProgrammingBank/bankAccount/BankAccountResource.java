@@ -19,8 +19,16 @@ public class BankAccountResource {
     @GetMapping("/users/{idUser}/bankaccount")
     public List<BankAccount> retrieveBankOfUser(@PathVariable int idUser) {
         List<BankAccount> Banks = userService.findOne(idUser).getBankAccounts();
-        System.out.println(Banks);
         return Banks;
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173/")
+    @DeleteMapping("/users/{idUser}/bankaccount/{idAccount}")
+    public List<BankAccount> deleteAccountById(@PathVariable int idUser, @PathVariable int idAccount) {
+        List<BankAccount> Banks = userService.findOne(idUser).getBankAccounts();
+        return service.deleteById(Banks,idAccount);
+        //System.out.println(Banks);
+         //Banks;
     }
 
 //    @CrossOrigin(origins = "http://localhost:5173/")

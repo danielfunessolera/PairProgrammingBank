@@ -76,7 +76,7 @@ const SignUp = () => {
 
     if (validateForm(firstName, lastName, userName, password, passwordConfirm)) {
       postUser(firstName, lastName, userName, password);
-		setUserLocalStorage(formState.userName);
+		setUserLocalStorage(firstName, lastName, userName);
 		updateUser(localStorage.getItem("user"));
 	}
   };

@@ -16,6 +16,7 @@ public class UserDaoService {
 
     static {
         bankAccounts.add(new BankAccount(1, "Cuenta Nómina", "La Caixa", 1000.20f));
+        bankAccounts.add(new BankAccount(2, "Cuenta Corriente", "La Caja Rural", 1000.20f));
         users.add(new User(++userCount, "Johnny", "macarroni", "Johnarroni", "1234asdF", bankAccounts) {
         });
     }
@@ -55,8 +56,6 @@ public class UserDaoService {
         }
 
         System.out.println("Existing user: " + existingUser.getFirstName());
-        // for(User usuario : users) { System.out.println(usuario.getFirstName() + " " + usuario.getPhone()); }
-
     }
 
 }
