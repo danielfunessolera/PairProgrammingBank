@@ -11,7 +11,7 @@ public class User {
     private static int userCount = 0;
 
     // Desde front
-    private Integer id;
+    private String id;
     private String firstName;
     private String lastName;
     private String userName;
@@ -21,8 +21,8 @@ public class User {
 
     private List<BankAccount> bankAccounts;
 
-    public User(Integer id, String firstName, String lastName, String userName, String password, List<BankAccount> bankAccount) {
-        this.id = ++userCount;
+    public User(String id, String firstName, String lastName, String userName, String password, List<BankAccount> bankAccount) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -30,11 +30,11 @@ public class User {
         this.bankAccounts = bankAccount;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

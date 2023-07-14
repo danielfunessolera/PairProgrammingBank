@@ -6,7 +6,6 @@ const deleteAccount = async (id) => {
     try {
         const response = await axios.delete(`${uri}users/1/bankaccount/${id}`)
         .then (function (response) {
-            console.log(response)
         })
     } catch (error) {
         console.error(error);

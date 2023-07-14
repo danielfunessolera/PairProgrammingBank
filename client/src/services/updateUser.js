@@ -2,9 +2,9 @@ import axios from "axios";
 
 const uri = "http://localhost:8040/";
 
-const updateUser = async ( firstName, lastName, email, phone) => {
+const updateUser = async ( id, firstName, lastName, email, phone) => {
     try {
-        const response = await axios.put(`${uri}users/1`, {
+        const response = await axios.put(`${uri}users/${id}`, {
             firstName,
             lastName,
             email,
