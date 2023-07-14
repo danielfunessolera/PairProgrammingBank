@@ -13,7 +13,7 @@ public class UserResource {
 
     @CrossOrigin(origins = "http://localhost:5173/")
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable int id) {
+    public User retrieveUser(@PathVariable String id) {
         User user = service.findOne(id);
         return user;
     }
@@ -22,15 +22,17 @@ public class UserResource {
     @PostMapping("/users")
     public void createUser (@RequestBody User user) {
         User savedUser = service.save(user);
-        System.out.println(savedUser.getUserName());
-        System.out.println(savedUser.getLastName());
-        System.out.println(savedUser.getFirstName());
+        // System.out.println(savedUser.getId());
+        // System.out.println(savedUser.getUserName());
+        // System.out.println(savedUser.getLastName());
+        // System.out.println(savedUser.getFirstName());
     }
 
     @CrossOrigin(origins = "http://localhost:5173/")
     @PutMapping("/users/{id}")
-    public void updateUser (@PathVariable int id, @RequestBody User user) {
+    public User updateUser (@PathVariable String id, @RequestBody User user) {
         service.update(id, user);
+        return user;
     }
 
 

@@ -1,15 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useId, useState } from "react";
 import Input from "../components/Input";
 import { RegisterForm } from "../components/RegisterForm";
 import { FormButton } from "../components/FormButton";
 import { Container, Typography } from "@mui/material";
 import postUser from "../services/registerUser";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [formState, setFormState] = useState({});
   const [errors, setErrors] = useState({});
-  const {user, updateUser} = useContext(AuthContext);
+  const { isLogged, updateIsLogged } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const id = useId();
+
+  // 1234asdF!
+
+  const handleSubmit = () => {
+    // TODO add validation
+    postUser(id, formState);
+    setUserLocalStorage(id);
+    updateIsLogged(true);
+    navigate("/user");
+  };
+
+  // useEffect(() => {
+  //   isLogged && navigate("/bankaccount")
+  // }, []);
 
   const errorsStyle = {
     color: "#EC2300",
@@ -18,8 +35,8 @@ const SignUp = () => {
     fontSize: ".9rem",
   };
 
-  const setUserLocalStorage = (user) => {
-    localStorage.setItem("user", user);
+  const setUserLocalStorage = (id) => {
+    localStorage.setItem("id", id);
   };
 
   const validateForm = (
@@ -57,28 +74,14 @@ const SignUp = () => {
       newErrors.password = "Password must contain at least one symbol";
     }
 
-	console.log(password, passwordConfirm);
-	console.log(password === passwordConfirm);
-
     if (password !== passwordConfirm) {
       newErrors.passwordConfirm = "Passwords do not match";
     }
 
     setErrors(newErrors);
-    console.log(newErrors);
 
     // Return true if there are no errors
     return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = () => {
-    const { firstName, lastName, userName, password, passwordConfirm } = formState;
-
-    if (validateForm(firstName, lastName, userName, password, passwordConfirm)) {
-      postUser(firstName, lastName, userName, password);
-		setUserLocalStorage(firstName, lastName, userName);
-		updateUser(localStorage.getItem("user"));
-	}
   };
 
   const handleInputChange = ({ target }) => {

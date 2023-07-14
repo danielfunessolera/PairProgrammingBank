@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppLayout } from "../layout/AppLayout";
 import { Card, Grid } from "@mui/material";
 import Input from "../components/Input";
-import fetchUser from "../services/userFetch";
 import { FormButton } from "../components";
 import Form from "@mui/material/FormControl/";
 import updateUser from "../services/updateUser";
+import { UserContext } from "../context/userContext";
 
 const User = () => {
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+  const { userContext, updateUserContext } = useContext(UserContext);
+
+  const [userUpdateForm, setUserUpdateForm] = useState({
+    firstName: userContext.firstName,
+    lastName: userContext.lastName,
+    email: userContext.email,
+    phone: userContext.phone,
   });
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
 
-    setUser({
-      ...user,
+    setUserUpdateForm({
+      ...userUpdateForm,
       [name]: value,
     });
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setUser(await fetchUser());
-    };
-    fetchData();
-  }, []);
+    setUserUpdateForm(userContext);
+  }, [userContext]);
 
   const handleSubmit = () => {
-    const { firstName, lastName, email, phone } = user;
-    updateUser(firstName, lastName, email, phone)
+    const { firstName, lastName, email, phone } = userUpdateForm;
+    const id = localStorage.getItem("id");
+    updateUser(id, firstName, lastName, email, phone);
+    updateUserContext(userUpdateForm);
+    console.log(userContext);
   };
 
   return (
@@ -53,7 +55,7 @@ const User = () => {
               name="firstName"
               minLength={1}
               maxLength={10}
-              value={user.firstName}
+              value={userUpdateForm.firstName}
               onChange={handleInputChange}
             />
             <Input
@@ -62,7 +64,7 @@ const User = () => {
               name="lastName"
               minLength={1}
               maxLength={10}
-              value={user.lastName}
+              value={userUpdateForm.lastName}
               onChange={handleInputChange}
             />
             <Input
@@ -71,7 +73,7 @@ const User = () => {
               name="email"
               minLength={1}
               maxLength={10}
-              value={user.email}
+              value={userUpdateForm.email}
               onChange={handleInputChange}
             />
             <Input
@@ -80,7 +82,7 @@ const User = () => {
               name="phone"
               minLength={1}
               maxLength={10}
-              value={user.phone}
+              value={userUpdateForm.phone}
               onChange={handleInputChange}
             />
             <FormButton type="submit" text={"Save"} onClick={handleSubmit} />

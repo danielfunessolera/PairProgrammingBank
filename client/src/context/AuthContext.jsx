@@ -1,34 +1,25 @@
 import React, { createContext, useEffect, useState } from "react";
 
-// Create the context
 export const AuthContext = createContext();
 
-// Create the provider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [isLogged, setIsLogged] = useState();
 
-  // Check localStorage for user on component mount
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
-    }
-    console.log(user);
-  }, [user]);
+    const storedUser = localStorage.getItem("id");
 
-  // Function to update the user and store it in localStorage
-  const updateUser = (newUser) => {
-    setUser(newUser);
-    const {username, lastname} = newUser;
-    if (newUser !== null && newUser !== undefined) {
-      localStorage.setItem("username", username);
-      localStorage.setItem("lastname", lastname);
-      localStorage.setItem("username", username);
+    if (storedUser) {
+      setIsLogged(true);
     }
-  };
+
+  }, []);
+
+  const updateIsLogged = (value) => {
+	  setIsLogged(value);
+  }
 
   return (
-    <AuthContext.Provider value={{ user, updateUser }}>
+    <AuthContext.Provider value={{ isLogged, updateIsLogged }}>
       {children}
     </AuthContext.Provider>
   );

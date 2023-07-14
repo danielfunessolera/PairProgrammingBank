@@ -31,8 +31,6 @@ const BankAccount = () => {
     deleteFn(id);
   };
 
-  console.log("account", account);
-
   return (
     <AppLayout>
       <Card sx={{ p: 4, m: 6 }}>

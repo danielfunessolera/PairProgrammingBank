@@ -13,25 +13,19 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { SidebarItem } from "./";
-import {
-  AccountBalance,
-  Logout,
-  Person,
-} from "@mui/icons-material";
+import { AccountBalance, Logout, Person } from "@mui/icons-material";
 import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+import getTotalSavings from "../services/getTotalSavings";
 
 export const SideBar = ({ drawerWidth = 280 }) => {
+  const navigate = useNavigate();
+  const [TotalSavings, setTotalSavings] = useState(0);
 
-  const {firstName, lastName, userName} = useContext(AuthContext);
-  // const { userName, email, balance } = {
-  //   userName: "pochico",
-  //   email: "Oleole@ole.com",
-  //   balance: "1,681.37",
-  // };
-  const balance = "1,322.32";
-
-  const { updateUser } = useContext(AuthContext);
+  const { updateIsLogged } = useContext(AuthContext);
+  const { userContext } = useContext(UserContext);
 
   const pages = [
     {
@@ -41,13 +35,21 @@ export const SideBar = ({ drawerWidth = 280 }) => {
     {
       text: "Bank Accounts",
       icon: <AccountBalance />,
-    }
+    },
   ];
 
   const logout = () => {
-    localStorage.removeItem("user");
-    updateUser(null);
+    localStorage.removeItem("id");
+    updateIsLogged(false);
+    navigate("/auth/signup");
   };
+
+  useEffect(() => {
+    const fetchTotalSavings = async () => {
+      setTotalSavings(await getTotalSavings(localStorage.getItem("id")));
+    }
+    fetchTotalSavings();
+  }, [])
 
   return (
     <Box
@@ -67,12 +69,19 @@ export const SideBar = ({ drawerWidth = 280 }) => {
         }}
       >
         <Toolbar>
-          <Container>
-            <Avatar></Avatar>
-          </Container>
-          <Grid container direction="column">
-            <Typography variant="h6">{firstName} {lastName}</Typography>
-            <Typography variant="p">{userName}</Typography>
+          <Grid container direction={"row"} wrap="nowrap" alignItems={"center"}>
+            <Grid container width={"40%"}>
+              <Avatar></Avatar>
+            </Grid>
+            <Grid container direction="column">
+              <Typography variant="h6">{userContext.userName}</Typography>
+              <Typography variant="p">
+                {userContext.firstName} {userContext.lastName}
+              </Typography>
+              {userContext.email && (
+                <Typography variant="p">{userContext.email}</Typography>
+              )}
+            </Grid>
           </Grid>
         </Toolbar>
 
@@ -80,7 +89,7 @@ export const SideBar = ({ drawerWidth = 280 }) => {
           <ListItem>
             <ListItemButton>
               <ListItemText
-                primary={`\$${balance}`}
+                primary={`\$${TotalSavings}`}
                 secondary="Account Balance"
               />
             </ListItemButton>
@@ -104,3 +113,8 @@ export const SideBar = ({ drawerWidth = 280 }) => {
     </Box>
   );
 };
+
+// const getTotalSavings = cuentas.reduce(
+//   (accumulator, currentValue) => accumulator + currentValue,
+//   initialValue
+// );
