@@ -33,9 +33,9 @@ const User = () => {
   const handleSubmit = () => {
     const { firstName, lastName, email, phone } = userUpdateForm;
     const id = localStorage.getItem("id");
+
     updateUser(id, firstName, lastName, email, phone);
     updateUserContext(userUpdateForm);
-    console.log(userContext);
   };
 
   return (

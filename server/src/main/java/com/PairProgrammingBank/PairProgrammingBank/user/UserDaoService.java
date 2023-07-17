@@ -16,8 +16,8 @@ public class UserDaoService {
     static {
         bankAccounts.add(new BankAccount(1, "Cuenta Nómina", "La Caixa", 1000.20f));
         bankAccounts.add(new BankAccount(2, "Cuenta Corriente", "La Caja Rural", 1000.20f));
-        users.add(new User("1", "Johnny", "macarroni", "Johnarroni", "1234asdF", bankAccounts) {
-        });
+        users.add(new User(":rt:", "Johnny", "macarroni", "Johnarroni", "1234asdF", bankAccounts){}
+        );
     }
 
     public User save(User user){
@@ -50,8 +50,8 @@ public class UserDaoService {
         if (updatedUser.getPhone() != null) {
             existingUser.setPhone(updatedUser.getPhone());
         }
-
-
     }
+
+
 
 }

@@ -31,10 +31,12 @@ export const SideBar = ({ drawerWidth = 280 }) => {
     {
       text: "My Account",
       icon: <Person />,
+      navigate: "/user",
     },
     {
       text: "Bank Accounts",
       icon: <AccountBalance />,
+      navigate: "/bankaccount",
     },
   ];
 
@@ -47,9 +49,9 @@ export const SideBar = ({ drawerWidth = 280 }) => {
   useEffect(() => {
     const fetchTotalSavings = async () => {
       setTotalSavings(await getTotalSavings(localStorage.getItem("id")));
-    }
+    };
     fetchTotalSavings();
-  }, [])
+  }, []);
 
   return (
     <Box
@@ -96,7 +98,7 @@ export const SideBar = ({ drawerWidth = 280 }) => {
           </ListItem>
           <Grid container direction="column">
             {pages.map((page) => (
-              <SidebarItem key={page.text} text={page.text} icon={page.icon} />
+              <SidebarItem key={page.text} text={page.text} icon={page.icon} navigate={page.navigate}/>
             ))}
           </Grid>
           <Container sx={{ mt: 2 }} />

@@ -9,7 +9,9 @@ export const UserProvider = ({ children }) => {
     const fetchData = async () => {
       setUserContext(await fetchUser(localStorage.getItem("id")));
     };
+
     fetchData();
+    
   }, []);
 
   const updateUserContext = (value) => {
