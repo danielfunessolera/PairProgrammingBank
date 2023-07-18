@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import { AppLayout } from "../layout/AppLayout";
 import { Card, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -12,6 +12,7 @@ const BankAccount = () => {
 	const [formState, setFormState] = useState({});
 	const [account, setAccount] = useState([]);
 	const [enableCreateAccount, setEnableCreateAccount] = useState(false);
+	const accountId = useId();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -49,7 +50,7 @@ const BankAccount = () => {
 
 	const handleCreateAccount = () => {
 		validateAccount() && //console.log({ validAccount: formState });
-			createBankAccount(localStorage.getItem("id"), formState);
+			createBankAccount(localStorage.getItem("id"), accountId, formState);
 	};
 
 	const validateAccount = () => {
@@ -77,13 +78,14 @@ const BankAccount = () => {
 							? <Button
 								sx={{ backgroundColor: "#AD0000", "&:hover": { backgroundColor: "#DA0000" } }}
 								variant="contained"
-								onClick={() => setEnableCreateAccount(true)}
+								onClick={() => setEnableCreateAccount(!enableCreateAccount)}
+								text="CANCEL"
 							>
 								CANCEL
 							</Button>
 							: <Button
 								variant="contained"
-								onClick={() => setEnableCreateAccount(true)}
+								onClick={() => setEnableCreateAccount(!enableCreateAccount)}
 							>
 								CREATE
 							</Button>

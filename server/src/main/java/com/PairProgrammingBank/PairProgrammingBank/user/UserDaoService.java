@@ -14,8 +14,8 @@ public class UserDaoService {
 
 
     static {
-        bankAccounts.add(new BankAccount(1, "Cuenta Nómina", "La Caixa", 1000.20f));
-        bankAccounts.add(new BankAccount(2, "Cuenta Corriente", "La Caja Rural", 1000.20f));
+        bankAccounts.add(new BankAccount("1", "Cuenta Nómina", "La Caixa", 1000.20f));
+        bankAccounts.add(new BankAccount("2", "Cuenta Corriente", "La Caja Rural", 1000.20f));
         users.add(new User(":rt:", "Johnny", "macarroni", "Johnarroni", "1234asdF", bankAccounts){}
         );
     }
@@ -52,6 +52,14 @@ public class UserDaoService {
         }
     }
 
+    public List<BankAccount> addBankAccount(String id, BankAccount bankAccount){
+        List<BankAccount> Banks = this.findOne(id).getBankAccounts();
+        Banks.add(Banks.size(), bankAccount);
 
+        Banks.get(Banks.size()-1).setBankName(bankAccount.getBankName());
+        System.out.println(Banks.get(Banks.size()-1).getBankName());
+        System.out.println(bankAccount.getAccountName());
+        return Banks;
+    }
 
 }

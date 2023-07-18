@@ -34,16 +34,16 @@ public class BankAccountResource {
 
     @CrossOrigin(origins = "http://localhost:5173/")
     @DeleteMapping("/users/{userId}/bankaccount/{idAccount}")
-    public List<BankAccount> deleteAccountById(@PathVariable String userId, @PathVariable int idAccount) {
+    public List<BankAccount> deleteAccountById(@PathVariable String userId, @PathVariable String idAccount) {
         List<BankAccount> Banks = userService.findOne(userId).getBankAccounts();
         return service.deleteById(Banks,idAccount);
     }
 
     @CrossOrigin(origins = "http://localhost:5173/")
     @PostMapping("/users/{userId}/bankaccount/createaccount")
-    public void createBankAccount(@PathVariable String userId, @RequestBody BankAccount bankAccount){
+    public List<BankAccount> createBankAccount(@PathVariable String userId, @RequestBody BankAccount bankAccount){
         System.out.println(userId);
-        //return service.addBankAccount(userId, bankAccount);
+        return service.addBankAccount(userId, bankAccount);
     }
 
 //    @CrossOrigin(origins = "http://localhost:5173/")
