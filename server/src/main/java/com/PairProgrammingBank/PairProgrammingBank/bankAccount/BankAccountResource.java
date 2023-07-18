@@ -17,26 +17,33 @@ public class BankAccountResource {
     }
 
     @CrossOrigin(origins = "http://localhost:5173/")
-    @GetMapping("/users/{idUser}/bankaccount")
-    public List<BankAccount> retrieveBankOfUser(@PathVariable String idUser) {
-        List<BankAccount> Banks = userService.findOne(idUser).getBankAccounts();
+    @GetMapping("/users/{userId}/bankaccount")
+    public List<BankAccount> retrieveBankOfUser(@PathVariable String userId) {
+        List<BankAccount> Banks = userService.findOne(userId).getBankAccounts();
         return Banks;
     }
 
     @CrossOrigin(origins = "http://localhost:5173/")
-    @GetMapping("/users/{idUser}/savings/bankaccount")
-    public String retrieveTotalSavings(@PathVariable String idUser) {
-        Double total = retrieveBankOfUser(idUser).stream().mapToDouble(BankAccount::getSavings).reduce(0, (a, b) -> a+b);
+    @GetMapping("/users/{userId}/savings/bankaccount")
+    public String retrieveTotalSavings(@PathVariable String userId) {
+        Double total = retrieveBankOfUser(userId).stream().mapToDouble(BankAccount::getSavings).reduce(0, (a, b) -> a+b);
         System.out.println(String.format("%.2f", total));
         return String.format("%.2f", total);
     }
 
 
     @CrossOrigin(origins = "http://localhost:5173/")
-    @DeleteMapping("/users/{idUser}/bankaccount/{idAccount}")
-    public List<BankAccount> deleteAccountById(@PathVariable String idUser, @PathVariable int idAccount) {
-        List<BankAccount> Banks = userService.findOne(idUser).getBankAccounts();
+    @DeleteMapping("/users/{userId}/bankaccount/{idAccount}")
+    public List<BankAccount> deleteAccountById(@PathVariable String userId, @PathVariable String idAccount) {
+        List<BankAccount> Banks = userService.findOne(userId).getBankAccounts();
         return service.deleteById(Banks,idAccount);
+    }
+
+    @CrossOrigin(origins = "http://localhost:5173/")
+    @PostMapping("/users/{userId}/bankaccount/createaccount")
+    public List<BankAccount> createBankAccount(@PathVariable String userId, @RequestBody BankAccount bankAccount){
+        System.out.println(userId);
+        return service.addBankAccount(userId, bankAccount);
     }
 
 //    @CrossOrigin(origins = "http://localhost:5173/")

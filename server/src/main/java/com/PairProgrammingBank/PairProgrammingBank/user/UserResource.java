@@ -21,11 +21,7 @@ public class UserResource {
     @CrossOrigin(origins = "http://localhost:5173/")
     @PostMapping("/users")
     public void createUser (@RequestBody User user) {
-        User savedUser = service.save(user);
-        // System.out.println(savedUser.getId());
-        // System.out.println(savedUser.getUserName());
-        // System.out.println(savedUser.getLastName());
-        // System.out.println(savedUser.getFirstName());
+        service.save(user);
     }
 
     @CrossOrigin(origins = "http://localhost:5173/")
