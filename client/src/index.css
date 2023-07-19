@@ -23,3 +23,22 @@ body {
   font-weight: 400;
   margin-top: 0;
 }
+
+a {
+  text-decoration: none;
+  color: #1976d2;
+  position: relative;
+}
+a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #1976d2;
+  transition: all 0.3s ease-in-out;
+}
+a:hover::after {
+  width: 100%;
+}

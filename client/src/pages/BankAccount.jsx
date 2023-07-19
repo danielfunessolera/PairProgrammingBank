@@ -49,8 +49,9 @@ const BankAccount = () => {
 	};
 
 	const handleCreateAccount = () => {
-		validateAccount() && //console.log({ validAccount: formState });
-			createBankAccount(localStorage.getItem("id"), accountId, formState);
+		const { accountName, bankName, initialAmount } = formState;
+		validateAccount() && createBankAccount(localStorage.getItem("id"), accountId, formState);
+		validateAccount() && setAccount([...account, { accountId, accountName, bankName, initialAmount }]);
 	};
 
 	const validateAccount = () => {
@@ -144,7 +145,7 @@ const BankAccount = () => {
 								key={i}
 							>
 								<p style={{ fontSize: "20px", color: "#1976d2" }}>
-									{acc.bankName + "-" + acc.accountName}
+									{acc.bankName + " - " + acc.accountName}
 								</p>
 								<Button
 									onClick={() => handleDelete(acc.id)}

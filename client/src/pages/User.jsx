@@ -9,7 +9,6 @@ import { UserContext } from "../context/userContext";
 
 const User = () => {
   const { userContext, updateUserContext } = useContext(UserContext);
-
   const [userUpdateForm, setUserUpdateForm] = useState({
     firstName: userContext.firstName,
     lastName: userContext.lastName,
@@ -28,7 +27,7 @@ const User = () => {
 
   useEffect(() => {
     setUserUpdateForm(userContext);
-  }, [userContext]);
+  }, []);
 
   const handleSubmit = () => {
     const { firstName, lastName, email, phone } = userUpdateForm;

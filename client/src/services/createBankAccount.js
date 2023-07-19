@@ -10,7 +10,6 @@ const createBankAccount = async (id, accId, form) => {
             bankName: form.bankName,
             initialAmount: form.initialAmount
          });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         throw error;

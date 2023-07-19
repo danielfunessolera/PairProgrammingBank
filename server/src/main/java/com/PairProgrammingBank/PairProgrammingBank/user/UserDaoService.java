@@ -22,8 +22,6 @@ public class UserDaoService {
 
     public User save(User user){
         users.add(user);
-
-        System.out.println(Arrays.toString(users.toArray()));
         return user;
     }
 
@@ -54,12 +52,17 @@ public class UserDaoService {
 
     public List<BankAccount> addBankAccount(String id, BankAccount bankAccount){
         List<BankAccount> Banks = this.findOne(id).getBankAccounts();
+        System.out.println(Banks);
         Banks.add(Banks.size(), bankAccount);
 
-        Banks.get(Banks.size()-1).setBankName(bankAccount.getBankName());
-        System.out.println(Banks.get(Banks.size()-1).getBankName());
-        System.out.println(bankAccount.getAccountName());
         return Banks;
+    }
+
+    public User findUserByName(String username, String password) {
+        Predicate<? super User> predicate = user -> user.getUserName().equals(username);
+        User foundUser = users.stream().filter(predicate).findFirst().orElse(null);
+        if(foundUser == null) return null;
+        return foundUser.getPassword().equals(password) ? foundUser : null;
     }
 
 }

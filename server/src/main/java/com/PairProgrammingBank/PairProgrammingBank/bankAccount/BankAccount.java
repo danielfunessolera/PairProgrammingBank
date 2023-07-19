@@ -25,4 +25,13 @@ public class BankAccount {
 //        this.savings = savings;
 //    }
 
+    /*
+    DB Connection:
+    username: julencastillo
+    password: PPBank123
+
+
+     */
+
+
 }

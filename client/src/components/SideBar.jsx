@@ -47,10 +47,10 @@ export const SideBar = ({ drawerWidth = 280 }) => {
   };
 
   useEffect(() => {
-    const fetchTotalSavings = async () => {
-      setTotalSavings(await getTotalSavings(localStorage.getItem("id")));
-    };
-    fetchTotalSavings();
+    // const fetchTotalSavings = async () => {
+    //   setTotalSavings(await getTotalSavings(localStorage.getItem("id")));
+    // };
+    // fetchTotalSavings();
   }, []);
 
   return (
@@ -77,12 +77,7 @@ export const SideBar = ({ drawerWidth = 280 }) => {
             </Grid>
             <Grid container direction="column">
               <Typography variant="h6">{userContext.userName}</Typography>
-              <Typography variant="p">
-                {userContext.firstName} {userContext.lastName}
-              </Typography>
-              {userContext.email && (
-                <Typography variant="p">{userContext.email}</Typography>
-              )}
+              <Typography variant="p" sx={{ fontSize: "0.9rem" }}>{userContext.email ? (userContext.email) : (userContext.firstName + " " + userContext.lastName)}</Typography>
             </Grid>
           </Grid>
         </Toolbar>
@@ -98,7 +93,7 @@ export const SideBar = ({ drawerWidth = 280 }) => {
           </ListItem>
           <Grid container direction="column">
             {pages.map((page) => (
-              <SidebarItem key={page.text} text={page.text} icon={page.icon} navigate={page.navigate}/>
+              <SidebarItem key={page.text} text={page.text} icon={page.icon} navigate={page.navigate} />
             ))}
           </Grid>
           <Container sx={{ mt: 2 }} />

@@ -5,7 +5,7 @@ import { FormButton } from "../components/FormButton";
 import { Container, Typography } from "@mui/material";
 import postUser from "../services/registerUser";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [formState, setFormState] = useState({});
@@ -23,10 +23,6 @@ const SignUp = () => {
     updateIsLogged(true);
     navigate("/user");
   };
-
-  // useEffect(() => {
-  //   isLogged && navigate("/bankaccount")
-  // }, []);
 
   const errorsStyle = {
     color: "#EC2300",
@@ -163,6 +159,8 @@ const SignUp = () => {
           onClick={handleSubmit}
         ></FormButton>
       </RegisterForm>
+      <Typography sx={{pt: "1rem"}}>Already have an account? <Link to="/auth/login">Login</Link>
+      </Typography>
     </Container>
   );
 };

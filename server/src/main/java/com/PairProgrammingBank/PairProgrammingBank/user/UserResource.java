@@ -31,5 +31,9 @@ public class UserResource {
         return user;
     }
 
-
+    @CrossOrigin(origins = "http://localhost:5173")
+    @PostMapping("/users/login")
+    public User loginUser (@RequestParam String username, @RequestParam String password) {
+        return service.findUserByName(username, password);
+    }
 }
